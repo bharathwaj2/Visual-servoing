@@ -1,0 +1,44 @@
+<?xml version="1.0"?>
+<sdf version="1.7">
+  <model name="aruco_marker">
+
+    <static>true</static>
+
+    <link name="aruco_marker_link">
+      <pose>0 0 0 0 0 0</pose>
+
+      <!-- Visual (texture via OGRE material script) -->
+      <visual name="marker_visual">
+        <geometry>
+          <box>
+            <!-- Scale marker to match cube's top face -->
+            <size>0.05 0.05 1e-5</size>
+          </box>
+        </geometry>
+        <material>
+          <script>
+            <uri>model://aruco_marker/materials/scripts/</uri>
+            <uri>model://aruco_marker/materials/textures/</uri>
+            <name>ArucoMarker/Marker</name>
+          </script>
+        </material>
+      </visual>
+
+      <!-- Collision plane so Gazebo doesn’t treat it as infinitely small -->
+      <collision name="marker_collision">
+        <geometry>
+          <box>
+            <size>0.05 0.05 0.001</size>
+          </box>
+        </geometry>
+        <surface>
+          <contact>
+            <collide_without_contact>true</collide_without_contact>
+          </contact>
+        </surface>
+      </collision>
+
+    </link>
+
+  </model>
+</sdf>

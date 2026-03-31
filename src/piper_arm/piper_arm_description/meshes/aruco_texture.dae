@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<COLLADA xmlns="http://www.collada.org/2005/11/COLLADASchema" version="1.4.1">
+  <asset>
+    <up_axis>Z_UP</up_axis>
+  </asset>
+
+  <library_images>
+    <image id="aruco_texture" name="aruco_texture">
+      <init_from>aruco_marker_tex.png</init_from>
+    </image>
+  </library_images>
+
+  <library_geometries>
+    <geometry id="Plane_001-mesh" name="Plane_001-mesh">
+      <mesh>
+        <source id="Plane_001-positions">
+          <float_array id="Plane_001-positions-array" count="12">
+            -0.5 -0.5 0
+             0.5 -0.5 0
+             0.5  0.5 0
+            -0.5  0.5 0
+          </float_array>
+          <technique_common>
+            <accessor source="#Plane_001-positions-array" count="4" stride="3">
+              <param name="X" type="float"/>
+              <param name="Y" type="float"/>
+              <param name="Z" type="float"/>
+            </accessor>
+          </technique_common>
+        </source>
+
+        <source id="Plane_001-uv">
+          <float_array id="Plane_001-uv-array" count="8">
+            0 0
+            1 0
+            1 1
+            0 1
+          </float_array>
+          <technique_common>
+            <accessor source="#Plane_001-uv-array" count="4" stride="2">
+              <param name="S" type="float"/>
+              <param name="T" type="float"/>
+            </accessor>
+          </technique_common>
+        </source>
+
+        <vertices id="Plane_001-vertices">
+          <input semantic="POSITION" source="#Plane_001-positions"/>
+        </vertices>
+
+        <polylist count="1">
+          <input semantic="VERTEX" source="#Plane_001-vertices" offset="0"/>
+          <input semantic="TEXCOORD" source="#Plane_001-uv" offset="1" set="0"/>
+          <vcount>4</vcount>
+          <p>0 0 1 1 2 2 3 3</p>
+        </polylist>
+      </mesh>
+    </geometry>
+  </library_geometries>
+
+  <library_visual_scenes>
+    <visual_scene id="Scene" name="Scene">
+      <node id="Plane_001" name="Plane_001">
+        <matrix>1 0 0 0  0 1 0 0  0 0 1 0  0 0 0 1</matrix>
+        <instance_geometry url="#Plane_001-mesh">
+          <bind_material>
+            <technique_common>
+              <instance_material symbol="material" target="#material">
+                <bind_vertex_input semantic="UVMap" input_semantic="TEXCOORD" input_set="0"/>
+              </instance_material>
+            </technique_common>
+          </bind_material>
+        </instance_geometry>
+      </node>
+    </visual_scene>
+  </library_visual_scenes>
+
+  <scene>
+    <instance_visual_scene url="#Scene"/>
+  </scene>
+</COLLADA>

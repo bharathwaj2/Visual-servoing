@@ -1,0 +1,26 @@
+<?xml version="1.0"?>
+<!-- OpenManipulator Chain -->
+<robot name="piper" xmlns:xacro="http://ros.org/wiki/xacro">
+  <xacro:arg name="prefix" default="" />
+  <xacro:arg name="use_sim" default="True" />
+
+
+  <!-- Launch this for IBVS/PBVS in Gazebo with sim Eye-in-Hand camera -->
+
+  <xacro:include filename="$(find piper_arm_description)/urdf/piper_arm_EIH.xacro" />
+  <xacro:piper_arm_EIH prefix="$(arg prefix)" />
+
+  <xacro:include filename="$(find piper_arm_description)/ros2_control/piper_arm_system.ros2_control.xacro" />
+  <xacro:piper_arm_system name="PiperArmSystem" prefix="$(arg prefix)" use_sim="$(arg use_sim)"/>
+
+
+
+  <gazebo>
+    <plugin name="gazebo_ros2_control" filename="libgazebo_ros2_control.so">
+      <robotNamespace>/piper</robotNamespace>
+      <parameters> $(find piper_arm_bringup)/config/gazebo_controller_manager.yaml </parameters>
+      <!-- <legacyModeNS>true</legacyModeNS> -->
+    </plugin>
+  </gazebo>
+
+</robot>
