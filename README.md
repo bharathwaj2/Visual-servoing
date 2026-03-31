@@ -125,7 +125,7 @@ ros2 launch visual_servoing vs.launch.py  # i=0:PBVS, 1:IBVS, 2:HEC, 3:IBVS_RL
 ## Control Loop Details
 
 - **Topics**:
-  - Sub: `/camera/color/image_raw`, `/camera/aligned_depth_to_color/image_raw`, `/joint_states`
+  - Sub: `/camera/color/image_raw`, `/camera/aligned_depth_to_color/image_raw`, `/joint_states` (camera topics in simulation environment)
   - Pub: `/servo_node/delta_twist_cmds` (TwistStamped, EE frame)
 - **TF**: `end_effector_link` → `camera_color_optical_frame` (hand-eye calibration)
 - **ArUco**: DICT_6X6_250, relaxed detection params.
